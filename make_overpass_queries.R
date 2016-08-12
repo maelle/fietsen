@@ -18,3 +18,9 @@ for (category in c("cycleway", "streets")){
 }
 
 natalie_queries <- dplyr::arrange(natalie_queries, category)
+
+# then do queries by category, might need a long time
+
+# for each city do the 5 queries, each query -> a spatial object to be stored as a list in a column of the cities data.frame
+
+# then depending on the category calculate the total distance / the number of nodes&ways
