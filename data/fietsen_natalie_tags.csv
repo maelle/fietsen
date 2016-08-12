@@ -60,8 +60,6 @@ tracks & track type;;way[highway=track][cycleway];way;2
  surface on paths & tracks;;way[surface~'^grass|^ground|^unpaved|^dirt|^earth|^sand|^woodchips|^pebble'];way;2
  surface on paths & tracks;;way[smoothness=bad](bbox);way;2
  surface on paths & tracks;;way[smoothness~'^very_bad|^horrible|^very_horrible|^impassable'](bbox);way;2
-highway=cycleway;cycleway;way[highway=cycleway];way;1
-highway=cycleway;cycleway;way[highway=path][bicycle=designated];way;1
 route=hiking, horse;;way[railway~'^abandoned|^disused|^dismantled'];way;2
 route=hiking, horse;;node[tourism=information];node;2
 non cyclable ways;;way[bicycle=no];way;2
@@ -72,29 +70,3 @@ cyclable ways;;way[highway][highway!~'^motorway|^trunk|^foot|^path|^pedes|^platf
 cyclable ways;;"way[highway][access~'^no|^priv'][bicycle~'^yes|^desig|^offic|^destin|^permis'](bbox);node(w);way[highway~'^foot|^path|^pedes|^platform|^steps|^bridleway|^prop|^constr|^trunk|^motor'][bicycle~'^yes|^desig|^offic|^destin|^permis']";way;2
 cyclable ways;;"way[highway~'^foot|^path|^pedes|^platform|^steps|^bridleway|^prop|^constr'][mtb~'^yes|^desig|^offic|^destin|^permis'](bbox);node(w);way[highway=steps]['ramp:bicycle'=yes]";way;2
 cyclable ways;;way[route=ferry][bicycle!=no];way;2
-bugs;;way[highway=cycleway][bicycle=no][moped!~'^yes|^designated'];way;2
-bugs;;way[cycleway][bicycle~'no|use_sidepath'][cycleway!=no];way;2
-bugs;;way[highway=crossing];way;2
-bugs;;way[highway=road];way;2
-bugs;;way[highway=cycleway][fixme];way;2
-bugs;;way[highway=cycleway][FIXME];way;2
-bugs;;way[cycleway][fixme];way;2
-bugs;;way[cycleway][FIXME];way;2
-bugs;;way[highway~'Pad|pad|Rad|rad|unknown'];way;2
-bugs;;"way(r:\""\"")";way;2
-bugs;;way.b[oneway=yes];way;2
-bugs;;"way.c[\""oneway:bicycle\""=no]";way;2
-bugs;;way.c[cycleway=opposite];way;2
-bugs;;"way.c[oneway=\""-1\""]";way;2
-bugs;;"way.c[oneway=\""bicycle:backward\""]";way;2
-bugs;;"way.c[oneway=\""bicycle:forward\""]";way;2
-bugs;;"way.c[cycleway=\""opposite_lane\""]";way;2
-bugs;;"way.c[\""oneway:bicycle\""=no]";way;2
-bugs;;way.c[cycleway=opposite];way;2
-bugs;;"way.c[oneway=\""-1\""]";way;2
-bugs;;"way.c[oneway=\""bicycle:backward\""]";way;2
-bugs;;"way.c[oneway=\""bicycle:forward\""]";way;2
-bugs;;"way.c[cycleway=\""opposite_lane\""]";way;2
-overbodige tags?;;way[highway=cycleway][cycleway][cycleway!=shared][cycleway!=segregated];way;2
-overbodige tags?;;way[highway=cycleway][bicycle~'yes|designated'];way;2
-overbodige tags?;;"way[name~'^Fietspad|^fietspad|^pad$|^Pad$|cycleway|^path$|^Path$'](bbox);node(w);way[highway=cycleway][name!~'.']";way;2
