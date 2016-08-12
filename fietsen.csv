@@ -1,0 +1,3 @@
+Category;Query_string;Object_type
+highway_cycleway;way[highway=cycleway];way
+highway_cycleway;way[highway~'path$|^footway$'][bicycle=designated];way
