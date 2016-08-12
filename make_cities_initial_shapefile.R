@@ -12,7 +12,7 @@ adm <- getData("GADM", country = country, level = level)
 
 city_sp_antwerp <- adm[adm$NAME_4 %in% city_realname,]
 save(city_sp_antwerp, file = "data/city_sp_antwerp.RData")
-file.remove(paste0("GADM_2.8_", country,"_adm", level, ".rds"))
+file.remove(paste0("GADM_2.8_GBR_adm1.rds"))
 
 ############################################################
 #                                                          #
