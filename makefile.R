@@ -20,3 +20,11 @@ library("htmltools")
 
 # source("make_cities_intial_shapefiles.R")
 source("make_shapefiles.R")
+
+
+############################################################
+#                                                          #
+#                         queries                          ####
+#                                                          #
+############################################################
+load("data/cities.RData")

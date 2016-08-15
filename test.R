@@ -7,7 +7,8 @@ bbox <- "(51.24,-0.61,51.73,0.41)"
 
 fietsen <- read_csv2("fietsen.csv")
 
-
+bbox <- paste0("(", 0.5, ",", 0.5, ",",
+               extent(city_sp)[4], ",", extent(city_sp)[2], ")")
 
 query <- paste0('[out:xml][timeout:1000];', '\n ',
 '(', '\n ',
