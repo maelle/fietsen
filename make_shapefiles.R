@@ -1,7 +1,7 @@
 # placeholder, probably there is a better way to do this :-)
 
 placeholder <- getData("GADM", country = "GBR", level = 1)
-
+file.remove("GADM_2.8_GBR_adm1.rds")
 ############################################################
 #                                                          #
 #                          table                           #
@@ -87,5 +87,5 @@ for(name in cities$cityshort){
 }
 
 
-
-
+save(cities, file = "data/cities.RData")
+rm(list = ls())
