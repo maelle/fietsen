@@ -64,3 +64,31 @@ function_shop <- function(df){
   df %>%
     mutate_(shop = lazyeval::interp(~length(shop[[1]])))
 }
+
+
+
+# figures
+make_maps <- function(sp){
+  map <- get_map(location = c(extent(city_sp)[1],
+                              extent(city_sp)[3],
+                              extent(city_sp)[2],
+                              extent(city_sp)[4]),
+                 zoom = 10)
+  gg <- ggmap(map)
+  if(class(sp) == "SpatialLinesDataFrame"){
+    df <- fortify(sp)
+    gg <- gg + geom_path(data=df, 
+                         aes(x=long, y=lat, group=group),
+                         color="red", size=0.25)
+  }else{
+    df <- as.data.frame(coordinates(sp))
+    gg <- gg + geom_point(data=df, 
+                          aes(x=lon, y=lat),
+                          color="red", size=0.25)
+  }
+  gg <- gg + coord_quickmap()
+  gg <- gg + ggthemes::theme_map()
+  gg
+  
+  
+}

@@ -41,11 +41,7 @@ non cyclable ways;;way[highway~'^foot|^path|^pedes|^platform|^steps|^bridleway|^
 non cyclable ways;;way[highway=track][horse=designated][access! ~'^no|^priv'][bicycle!~'^no|^yes|^desig|^offic|^destin|^permis'][mtb!~'^yes|^desig|^offic|^destin|^permis']['mtb:scale'!~'^'][route!=mtb];way;2
 non cyclable ways;;way[bicycle=use_sidepath];way;2
 non cyclable ways;;way[bicycle=no];way;2
-highways;streets;way[highway=cycleway];way;1
-highways;streets;way[highway=path][bicycle=designated];way;1
-highways;streets;way[highway=footway];way;1
-highways;streets;way[highway=path][bicycle!~'^designated'];way;1
-highways;streets;way[highway=pedestrian];way;1
+highways;streets;way[highway];way;1
 tracks & track type;;way[tracktype=grade1];way;2
 tracks & track type;;way[tracktype=grade2];way;2
 tracks & track type;;way[tracktype=grade3];way;2
