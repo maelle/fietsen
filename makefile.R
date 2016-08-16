@@ -11,7 +11,7 @@ library("maptools")
 library("ggplot2")
 library("readr")
 library("htmltools")
-
+library("ggmap")
 ############################################################
 #                                                          #
 # make the data.frame with basic information about cities  #
@@ -24,7 +24,10 @@ source("make_shapefiles.R")
 
 ############################################################
 #                                                          #
-#                         queries                          ####
+#                         queries                          #
 #                                                          #
 ############################################################
+
+source("make_query_strings.R")
 load("data/cities.RData")
+load("data/natalie_queries.RData")

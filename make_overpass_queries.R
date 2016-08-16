@@ -1,50 +1,80 @@
-natalie_queries <- read_csv2("data/fietsen_natalie_tags.csv")
-names(natalie_queries) <- c("fiets_category", "category", "query_string", "object_type", "wanted")
-natalie_queries <- dplyr::filter(natalie_queries, wanted == 1)
-natalie_queries <- dplyr::select(natalie_queries, category, query_string, object_type)
+source("utils.R")
 
-# for queries with only ways we need to add a line with nodes
-# because otherwise the overpass package will not be able to process them somehow
-for (categori in c("cycleway", "streets")){
-  subset <- dplyr::filter(natalie_queries, category == categori)
-  newdata <- NULL
-  for (j in 1:nrow(subset)){
-    newdata <- rbind(newdata,
-                     data.frame(category = category,
-                     query_string = gsub("way\\[", "node\\[", subset$query_string[j]),
-                     object_type = "node"))
+
+whatweget <- as.list(cities$sp[1:2]) %>%
+  purrr::map(get_info_city, natalie_queries)
+
+lala <- tibble::as_tibble(test)
+lala <- rbind(lala, lala)
+lala <- mutate_(lala, city = lazyeval::interp(~c("city1", "city2"))) 
+
+#distances and sums
+function_street <- function(df){
+  df %>%
+    group_by_(~city) %>%
+    mutate_(streets = ~fortify(streets[[1]])  %>%
+              slice_rows("group") %>%
+              by_slice(distance_function,
+                       .collate = "rows",
+                       .to = "distance") %>% list()) %>%
+    mutate_(streets = lazyeval::interp(~sum(streets[[1]]$"distance")/1000))
+}
+
+function_cycleway <- function(df){
+  df %>%
+    group_by_(~city) %>%
+    mutate_(cycleway = ~fortify(cycleway[[1]])  %>%
+              slice_rows("group") %>%
+              by_slice(distance_function,
+                       .collate = "rows",
+                       .to = "distance") %>% list()) %>%
+    mutate_(cycleway = lazyeval::interp(~sum(cycleway[[1]]$"distance")/1000))
+}
+
+function_parkingrental <- function(df){
+  df %>%
+    mutate_(renting_rental = lazyeval::interp(~length(renting_rental[[1]])))
+}
+
+function_barrier <- function(df){
+  df %>%
+    mutate_(barrier = lazyeval::interp(~length(barrier[[1]])))
+}
+
+function_shop <- function(df){
+  df %>%
+    mutate_(shop = lazyeval::interp(~length(shop[[1]])))
+}
+
+whatweget <- whatweget %>%
+  function_street() %>%
+  function_cycleway() %>%
+  function_parkingrental() %>%
+  function_barrier() %>%
+  function_shop()
+
+# figures
+make_maps <- function(sp){
+  map <- get_map(location = c(extent(city_sp)[1],
+                              extent(city_sp)[3],
+                              extent(city_sp)[2],
+                              extent(city_sp)[4]),
+                 zoom = 10)
+  gg <- ggmap(map)
+  if(class(sp) == "SpatialLinesDataFrame"){
+    df <- fortify(sp)
+    gg <- gg + geom_path(data=df, 
+                         aes(x=long, y=lat, group=group),
+                         color="red", size=0.25)
+  }else{
+    df <- as.data.frame(coordinates(sp))
+    gg <- gg + geom_point(data=df, 
+                         aes(x=lon, y=lat),
+                         color="red", size=0.25)
   }
-  natalie_queries <- dplyr::bind_rows(natalie_queries, newdata)
-}
-
-natalie_queries <- dplyr::arrange(natalie_queries, category)
-
-
-# then do queries by category, might need a long time
-
-# for each city do the 5 queries, each query -> a spatial object to be stored as a list in a column of the cities data.frame
-
-summarize_city <- function(natalie_queries, city_sp){
-  bbox <- paste0("(", extent(city_sp)[3], ",", extent(city_sp)[1], ",",
-                 extent(city_sp)[4], ",", extent(city_sp)[2], ")")
+  gg <- gg + coord_quickmap()
+  gg <- gg + ggthemes::theme_map()
+  gg
   
-  dplyr::group_by_(natalie_queries, ~category) %>%
-    summarize_(query = lazyeval::interp(~gsub(", ", 
-                           paste(bbox, '; \n '),
-                           toString(query_string)))) %>%
-    mutate_(query = lazyeval::interp(~paste0("[out:xml][timeout:100];\n (\n ",
-                                             query,
-                                             bbox,";\n\n );\n out body;\n >;\n out skel qt;"))) %>%
-    dplyr::select(query) %>%
-    purrr::by_row(make_query) %>%
-    purrr::map(filter_sp, sp2 = city_sp)
-}
-
-make_query <- function(query){
-  overpass_query(query$query)
-}
-
-filter_sp <- function(sp1, sp2){
-  crs(sp1) <- crs(sp2)
-  sp1[sp2,]
+  
 }

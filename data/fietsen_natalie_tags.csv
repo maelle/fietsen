@@ -42,7 +42,7 @@ non cyclable ways;;way[highway=track][horse=designated][access! ~'^no|^priv'][bi
 non cyclable ways;;way[bicycle=use_sidepath];way;2
 non cyclable ways;;way[bicycle=no];way;2
 highways;streets;way[highway=cycleway];way;1
-highways;streets;way[highway=path][bicycle=designated](bbox);way;1
+highways;streets;way[highway=path][bicycle=designated];way;1
 highways;streets;way[highway=footway];way;1
 highways;streets;way[highway=path][bicycle!~'^designated'];way;1
 highways;streets;way[highway=pedestrian];way;1
