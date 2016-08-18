@@ -15,12 +15,7 @@ library("ggmap")
 library("rgdal")
 library("htmlwidgets")
 
-distance_function <- function(df){
-  filtered <- dplyr::select(df, long, lat)
-  filtered1 <- filtered[1:(nrow(filtered) - 1),]
-  filtered2 <- filtered[2:nrow(filtered),]
-  sum(distGeo(filtered1, filtered2))
-}
+
 
 ############################################################
 #                                                          #

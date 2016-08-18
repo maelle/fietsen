@@ -14,4 +14,5 @@ whatweget %>%
   function_parkingrental() %>%
   function_barrier() %>%
   function_shop() %>%
-  dplyr::select(city, everything())
+  dplyr::select(city, everything()) %>%
+  write_csv(path = "tadaaa.csv")
