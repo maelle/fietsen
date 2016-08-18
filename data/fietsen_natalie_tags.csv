@@ -1,6 +1,6 @@
 Category;Category name change;Query_string;Object_type;"WANTED (1=YES; 2=NO)"
 highway_cycleway;cycleway;way[highway=cycleway];way;1
-highway_cycleway;cycleway;way[highway~'path$|^footway$'][bicycle=designated];way;1
+highway_cycleway;cycleway;way[highway~'path$|^footway$'][bicycle=designated];way;2
 highway_cycleway;cycleway;way[highway=cycleway][moped~'^designated$|^yes$'];way;2
 highway_cycleway;cycleway;way[highway=cycleway][moped=no];way;1
 highway_cycleway;cycleway;way[highway=cycleway][mofa=no];way;1
@@ -41,7 +41,22 @@ non cyclable ways;;way[highway~'^foot|^path|^pedes|^platform|^steps|^bridleway|^
 non cyclable ways;;way[highway=track][horse=designated][access! ~'^no|^priv'][bicycle!~'^no|^yes|^desig|^offic|^destin|^permis'][mtb!~'^yes|^desig|^offic|^destin|^permis']['mtb:scale'!~'^'][route!=mtb];way;2
 non cyclable ways;;way[bicycle=use_sidepath];way;2
 non cyclable ways;;way[bicycle=no];way;2
-highways;streets;way[highway];way;1
+highways;streets;way[highway=motorway];way;2
+highways;streets;way[highway=trunk];way;2
+highways;streets;way[highway=primary];way;2
+highways;streets;way[highway=secondary];way;2
+highways;streets;way[highway=tertiary];way;2
+highways;streets;way[highway=unclassified];way;2
+highways;streets;way[highway=residential];way;2
+highways;streets;way[highway=motorway_link];way;2
+highways;streets;way[highway=trunk_link];way;2
+highways;streets;way[highway=primary_link];way;2
+highways;streets;way[highway=secondary_link];way;2
+highways;streets;way[highway=tertiary_link];way;2
+highways;streets;way[highway=living_street];way;2
+highways;streets;way[highway=track];way;2
+highways;streets;way[highway=bus_guideway];way;2
+highways;streets;way[highway=road];way;2
 tracks & track type;;way[tracktype=grade1];way;2
 tracks & track type;;way[tracktype=grade2];way;2
 tracks & track type;;way[tracktype=grade3];way;2

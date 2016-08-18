@@ -5,7 +5,7 @@ natalie_queries <- dplyr::select(natalie_queries, category, query_string, object
 
 # for queries with only ways we need to add a line with nodes
 # because otherwise the overpass package will not be able to process them somehow
-for (categori in c("cycleway", "streets")){
+for (categori in c("cycleway")){
   subset <- dplyr::filter(natalie_queries, category == categori)
   newdata <- NULL
   for (j in 1:nrow(subset)){

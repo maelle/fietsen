@@ -1,7 +1,8 @@
 get_info_city <- function(city_sp, natalie_queries){
+  print(extent(city_sp))
   bbox <- paste0("(", extent(city_sp)[3], ",", extent(city_sp)[1], ",",
                  extent(city_sp)[4], ",", extent(city_sp)[2], ")")
-  
+
   dplyr::group_by_(natalie_queries, ~category) %>%
     summarize_(query = lazyeval::interp(~gsub(", ", 
                                               paste(bbox, '; \n '),
@@ -14,7 +15,7 @@ get_info_city <- function(city_sp, natalie_queries){
     unlist() %>%
     purrr::map(make_query) %>% 
     purrr::map(filter_sp, sp2 = city_sp) %>%
-    setNames(c("barrier", "renting_rental", "shop", "cycleway", "streets"))
+    setNames(c("barrier", "renting_rental", "shop", "cycleway"))#, "streets"))
 }
 
 make_query <- function(query){
@@ -69,11 +70,11 @@ function_shop <- function(df){
 
 # figures
 make_maps <- function(sp){
-  map <- get_map(location = c(extent(city_sp)[1],
-                              extent(city_sp)[3],
-                              extent(city_sp)[2],
-                              extent(city_sp)[4]),
-                 zoom = 10)
+  map <- get_map(location = c(extent(sp)[1],
+                              extent(sp)[3],
+                              extent(sp)[2],
+                              extent(sp)[4]),
+                 zoom = 11)
   gg <- ggmap(map)
   if(class(sp) == "SpatialLinesDataFrame"){
     df <- fortify(sp)

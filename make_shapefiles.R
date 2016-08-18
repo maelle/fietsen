@@ -75,15 +75,28 @@ cities <- tibble(cityshort = c("antwerp",
 #                         add info                         #
 #                                                          #
 ############################################################
-for(name in cities$cityshort){
+for(i in 1:nrow(cities)){
+  name <- cities$cityshort[i]
   load(paste0("data/city_sp_", name, ".RData"))
   assign("city_sp",get(paste0("city_sp_", name)))
-  i <- which(cities$cityshort == name)
+  
+
+  if(name == "roma"){
+    city_sp <- crop(city_sp, extent(12.3, 12.79598, 41.42999, 42.06))
+    assign(paste0("city_sp_", name), get("city_sp"))
+    save(city_sp_roma, file = paste0("data/city_sp_", name, ".RData"))
+  }else{
+    if(name == "london"){
+      city_sp <- crop(city_sp, extent(-0.61, 0.41, 51.24, 51.73))
+      assign(paste0("city_sp_", name), get("city_sp"))
+      save(city_sp_london, file = paste0("data/city_sp_", name, ".RData"))
+    }
+    
+  }
+  
   cities$sp[i] <- list(city_sp)
-  cities$min_longitude[i] <- extent(city_sp)[1]
-  cities$max_longitude[i] <- extent(city_sp)[2]
-  cities$min_latitude[i] <- extent(city_sp)[3]
-  cities$max_latitude[i] <- extent(city_sp)[4]
+  
+  
 }
 
 
