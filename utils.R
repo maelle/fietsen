@@ -1,3 +1,4 @@
+# function for getting information for one city
 get_info_city <- function(city_sp, natalie_queries){
   print(extent(city_sp))
   bbox <- paste0("(", extent(city_sp)[3], ",", extent(city_sp)[1], ",",
@@ -18,17 +19,19 @@ get_info_city <- function(city_sp, natalie_queries){
     setNames(c("barrier", "renting_rental", "shop", "cycleway"))#, "streets"))
 }
 
+# function for querying Overpass, small break before
 make_query <- function(query){
   Sys.sleep(10)
   overpass_query(query)
 }
 
+# function for keeping sp things only inside boundaries (sp2)
 filter_sp <- function(sp, sp2){
   crs(sp) <- crs(sp2)
   list(sp[sp2,])
 }
 
-#distances and sums
+#d istances and sums
 function_street <- function(df){
   df %>%
     group_by_(~city) %>%

@@ -23,8 +23,8 @@ library("htmlwidgets")
 #                                                          #
 ############################################################
 
-# source("make_cities_intial_shapefiles.R")
-source("make_shapefiles.R")
+# source("code/make_cities_initial_shapefiles.R")
+source("code/make_shapefiles.R")
 
 
 ############################################################
@@ -33,9 +33,9 @@ source("make_shapefiles.R")
 #                                                          #
 ############################################################
 
-source("make_query_strings.R")
+source("code/make_query_strings.R")
 load("data/cities.RData")
 load("data/natalie_queries.RData")
-source("utils.R")
-source("make_overpass_queries.R")
-source("make_maps.R")
+source("code/utils.R")
+source("code/make_overpass_queries.R")
+source("code/make_maps.R")
