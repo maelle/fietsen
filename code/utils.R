@@ -19,6 +19,27 @@ get_info_city <- function(city_sp, natalie_queries){
     setNames(c("barrier", "renting_rental", "shop", "cycleway"))#, "streets"))
 }
 
+# streets
+get_streets_city <- function(city_sp, natalie_streets_queries){
+  print(extent(city_sp))
+  bbox <- paste0("(", extent(city_sp)[3], ",", extent(city_sp)[1], ",",
+                 extent(city_sp)[4], ",", extent(city_sp)[2], ")")
+  
+  dplyr::group_by_(natalie_streets_queries, ~category) %>%
+    summarize_(query = lazyeval::interp(~gsub(", ", 
+                                              paste(bbox, '; \n '),
+                                              toString(query_string)))) %>%
+    mutate_(query = lazyeval::interp(~paste0("[out:xml][timeout:100];\n (\n ",
+                                             query,
+                                             bbox,";\n\n );\n out body;\n >;\n out skel qt;"))) %>% 
+    dplyr::select(query) %>%
+    as.list() %>%
+    unlist() %>%
+    purrr::map(make_query) %>% 
+    purrr::map(filter_sp, sp2 = city_sp) %>%
+    setNames("streets")
+}
+
 # function for querying Overpass, small break before
 make_query <- function(query){
   Sys.sleep(10)

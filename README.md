@@ -2,7 +2,10 @@ Finding cycle paths and tracks in 7 cities
 ==========================================
 
 In this repo I store the code I used for finding cycle paths and tracks
-in 7 cities.
+in 7 cities. The key to getting the data I needed is the [R `overpass`
+package](https://github.com/hrbrmstr/overpass) which works with the
+[OpenStreetMap Overpass
+API](http://wiki.openstreetmap.org/wiki/Overpass_API).
 
 -   I have defined [a bunch of functions](code/utils.R) for making the
     Overpass queries and computing distances or numbers of given nodes.
@@ -24,9 +27,13 @@ in 7 cities.
 -   I prepared the query strings [in this
     code](code/make_query_strings.R).
 
--   I made the queries and calculations
+-   I made the queries and calculations for cycling infrastructure
     [here](code/make_overpass_queries.R). The results are [in this file
     with a stupid name](tadaaa.csv).
+
+-   I made the queries and calculations for cycling infrastructure
+    [here](code/make_overpass_streets_queries.R). The results are [in
+    this file with a stupid name](tadaaa_streets.csv).
 
 -   I also produced a few maps thanks to [this code](code/make_maps.R)
     The maps are in the [maps folder](maps/).
