@@ -1,5 +1,3 @@
-source("utils.R")
-
 whatweget_streets <- as.list(cities$sp) %>%
   purrr::map(get_streets_city, natalie_streets_queries)
 

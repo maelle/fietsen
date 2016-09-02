@@ -1,5 +1,3 @@
-source("utils.R")
-
 whatweget <- as.list(cities$sp) %>%
   purrr::map(get_info_city, natalie_queries)
 
