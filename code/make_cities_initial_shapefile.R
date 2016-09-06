@@ -52,9 +52,9 @@ file.remove(paste0("GADM_2.8_", country,"_adm", level, ".rds"))
 #                                                          #
 ############################################################
 dsn <- paste0(getwd(), "/Sweden_shapefile/my_riks")
-adm <- readShapePoly(dsn)
+adm <- raster::shapefile(dsn)
 adm <- adm[adm$KKOD == 303 & adm$NAMN1 == "Örebro",]
-proj4string(adm) <- CRS("+init=epsg:32633 ") # WGS 84 / UTM zone 33N 
+#proj4string(adm) <- CRS("+init=epsg:32633 ") # WGS 84 / UTM zone 33N 
 CRS.new <- CRS("+init=epsg:4326") # WGS 84
 city_sp_orebro <- spTransform(adm, CRS.new)
 save(city_sp_orebro, file = "data/city_sp_orebro.RData")
@@ -65,9 +65,9 @@ save(city_sp_orebro, file = "data/city_sp_orebro.RData")
 #                                                          #
 ############################################################
 dsn <- paste0(getwd(), "/Italy_shapefile/Localita_11_WGS84")
-adm <- readShapePoly(dsn)
+adm <- raster::shapefile(dsn)
 adm <- adm[adm$DENOMINAZI == "Roma",]
-proj4string(adm) <- CRS("+init=epsg:23032") # ED50 / UTM zone 32N
+#proj4string(adm) <- CRS("+init=epsg:23032") # ED50 / UTM zone 32N
 CRS.new <- CRS("+init=epsg:4326") # WGS 84
 city_sp_roma <- spTransform(adm, CRS.new)
 save(city_sp_roma, file = "data/city_sp_roma.RData")
