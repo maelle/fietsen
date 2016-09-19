@@ -64,13 +64,11 @@ save(city_sp_orebro, file = "data/city_sp_orebro.RData")
 #                       Roma - Italy                       #
 #                                                          #
 ############################################################
-dsn <- paste0(getwd(), "/Italy_shapefile/Localita_11_WGS84")
-adm <- raster::shapefile(dsn)
-adm <- adm[adm$DENOMINAZI == "Roma",]
-#proj4string(adm) <- CRS("+init=epsg:23032") # ED50 / UTM zone 32N
-CRS.new <- CRS("+init=epsg:4326") # WGS 84
-city_sp_roma <- spTransform(adm, CRS.new)
+adm <- getData("GADM", country = "ITA", level = 3)
+
+city_sp_roma <- adm[adm$NAME_3 == "Roma",]
 save(city_sp_roma, file = "data/city_sp_roma.RData")
+file.remove(paste0("GADM_2.8_", "ITA","_adm", 3, ".rds"))
 
 ############################################################
 #                                                          #
