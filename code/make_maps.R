@@ -28,7 +28,7 @@ for (i in 1:7){
 load("whatweget_streets.RData")
 
 for (i in 1:7){
-  sp <- whatweget_streets$cycleway[i][[1]]
+  sp <- whatweget_streets$streets[i][[1]]
   m <- leaflet() %>% 
     addTiles()%>%
     addCircleMarkers(data=fortify(sp), col = "red",
