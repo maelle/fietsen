@@ -51,9 +51,9 @@ file.remove(paste0("GADM_2.8_", country,"_adm", level, ".rds"))
 #                    Oerebro -  Sweden                     #
 #                                                          #
 ############################################################
-dsn <- paste0(getwd(), "/Sweden_shapefile/my_riks")
+dsn <- paste0(getwd(), "/Sweden_shapefile/ak_riks")
 adm <- raster::shapefile(dsn)
-adm <- adm[adm$KKOD == 303 & adm$NAMN1 == "Örebro",]
+adm <- adm[adm$KOMMUNNAMN == "Örebro",]
 #proj4string(adm) <- CRS("+init=epsg:32633 ") # WGS 84 / UTM zone 33N 
 CRS.new <- CRS("+init=epsg:4326") # WGS 84
 city_sp_orebro <- spTransform(adm, CRS.new)
