@@ -76,19 +76,19 @@ source("code/make_cities_initial_shapefile.R")
 #                                                          #
 ############################################################
 for(i in 1:nrow(cities)){
+
   name <- cities$cityshort[i]
   load(paste0("data/city_sp_", name, ".RData"))
   assign("city_sp",get(paste0("city_sp_", name)))
   
-
+  
   if(name == "london"){
     city_sp <- crop(city_sp, extent(-0.61, 0.41, 51.24, 51.73))
-    assign(paste0("city_sp_", name), get("city_sp"))
-    save(city_sp_london, file = paste0("data/city_sp_", name, ".RData"))
+    assign("city_sp_london", get("city_sp"))
+    save(city_sp_london, file = "data/city_sp_london.RData")
   }
   
   cities$sp[i] <- list(city_sp)
-  
   
 }
 
