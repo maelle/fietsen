@@ -90,6 +90,7 @@ for(i in 1:nrow(cities)){
   
   cities$sp[i] <- list(city_sp)
   
+  
 }
 
 

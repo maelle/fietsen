@@ -99,6 +99,6 @@ country <- "CHE"
 
 adm <- getData("GADM", country = country, level = level)
 
-city_sp_zurich <- adm[adm$NAME_2 %in% city_realname,]
+city_sp_zurich <- adm[grepl("Z.rich", adm$NAME_2),]
 save(city_sp_zurich, file = "data/city_sp_zurich.RData")
 file.remove(paste0("GADM_2.8_", country,"_adm", level, ".rds"))
