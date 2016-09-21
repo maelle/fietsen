@@ -23,7 +23,7 @@ library("htmlwidgets")
 #                                                          #
 ############################################################
 
-# source("code/make_cities_initial_shapefiles.R")
+source("code/make_cities_initial_shapefiles.R")
 source("code/make_shapefiles.R")
 
 
