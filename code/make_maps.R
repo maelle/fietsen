@@ -25,7 +25,7 @@ for (i in 1:7){
 ############################################################
 
 
-load("whatweget_streets.RData")
+load("data/whatweget_streets.RData")
 
 for (i in 1:7){
   sp <- whatweget_streets$streets[i][[1]]
