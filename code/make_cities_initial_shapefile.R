@@ -12,7 +12,7 @@ adm <- getData("GADM", country = country, level = level)
 
 city_sp_antwerp <- adm[adm$NAME_4 %in% city_realname,]
 save(city_sp_antwerp, file = "data/city_sp_antwerp.RData")
-file.remove(paste0("GADM_2.8_GBR_adm1.rds"))
+file.remove(paste0("GADM_2.8_BEL_adm4.rds"))
 
 ############################################################
 #                                                          #
@@ -36,7 +36,7 @@ file.remove(paste0("GADM_2.8_", country,"_adm", level, ".rds"))
 #                                                          #
 ############################################################
 city_englishname <- "London"
-city_realname <- cities$city[cities$cityshort == "London"][[1]]
+city_realname <- cities$city[cities$cityshort == "london"][[1]]
 level <- 2
 country <- "GBR"
 
@@ -53,7 +53,7 @@ file.remove(paste0("GADM_2.8_", country,"_adm", level, ".rds"))
 ############################################################
 dsn <- paste0(getwd(), "/Sweden_shapefile/ak_riks")
 adm <- raster::shapefile(dsn)
-adm <- adm[adm$KOMMUNNAMN == "Örebro",]
+adm <- adm[grepl(".rebro", adm$KOMMUNNAMN),]
 #proj4string(adm) <- CRS("+init=epsg:32633 ") # WGS 84 / UTM zone 33N 
 CRS.new <- CRS("+init=epsg:4326") # WGS 84
 city_sp_orebro <- spTransform(adm, CRS.new)
@@ -92,15 +92,13 @@ file.remove(paste0("GADM_2.8_", country,"_adm", level, ".rds"))
 #                                                          #
 ############################################################
 
-
-
-city_englishname <- "Antwerp"
-city_realname <- "Antwerpen"
-level <- 4
-country <- "BEL"
+city_englishname <- "Zurich"
+city_realname <- "Zürich"
+level <- 3
+country <- "CHE"
 
 adm <- getData("GADM", country = country, level = level)
 
-city_sp_antwerp <- adm[adm$NAME_4 %in% city_realname,]
-save(city_sp_antwerp, file = "data/city_sp_antwerp.RData")
+city_sp_zurich <- adm[adm$NAME_2 %in% city_realname,]
+save(city_sp_zurich, file = "data/city_sp_zurich.RData")
 file.remove(paste0("GADM_2.8_", country,"_adm", level, ".rds"))

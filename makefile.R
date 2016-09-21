@@ -22,8 +22,7 @@ library("htmlwidgets")
 # make the data.frame with basic information about cities  #
 #                                                          #
 ############################################################
-
-source("code/make_cities_initial_shapefile.R")
+rm(list=ls())
 source("code/make_shapefiles.R")
 
 
@@ -34,9 +33,10 @@ source("code/make_shapefiles.R")
 ############################################################
 
 source("code/make_query_strings.R")
-load("data/cities.RData")
+
 load("data/natalie_queries.RData")
 source("code/utils.R")
+load("data/cities.RData")
 source("code/make_overpass_queries.R")
 
 load("data/cities.RData")
